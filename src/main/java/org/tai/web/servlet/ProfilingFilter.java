@@ -3,6 +3,7 @@ package org.tai.web.servlet;
 import com.google.common.base.Stopwatch;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -18,7 +19,7 @@ import java.util.concurrent.TimeUnit;
  * @author Przemyslaw Dadel
  */
 public class ProfilingFilter implements Filter {
-
+    private PerSessionRequestCounter counter;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ProfilingFilter.class);
 
@@ -29,6 +30,8 @@ public class ProfilingFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+        counter.requestCount();
+        System.err.println("COS LICZE!");
         final Stopwatch stopwatch = Stopwatch.createStarted();
         try {
             filterChain.doFilter(servletRequest, servletResponse);
@@ -41,4 +44,9 @@ public class ProfilingFilter implements Filter {
     public void destroy() {
 
     }
+
+    public void setCounter(PerSessionRequestCounter counter) {
+        this.counter = counter;
+    }
+
 }
