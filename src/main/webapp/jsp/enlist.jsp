@@ -21,7 +21,7 @@
         <form:input path="accountNumber" class="form-control"
                     placeholder="Type account number in here"/>
 
-        <form:label path="transactionValue">Account Number</form:label>
+        <form:label path="transactionValue">Transaction value</form:label>
         <form:input path="transactionValue" class="form-control"
                     placeholder="Type transaction value in here"/>
     </div>

@@ -35,10 +35,12 @@ public class TransactionController {
         this.transactionService = transactionService;
     }
 
+    @RequestMapping(value = "/enlist", method = RequestMethod.GET)
     public ModelAndView prepareEnlistNewTransaction() {
         return new ModelAndView("enlist", "command", new NewUserTransaction());
     }
 
+    @RequestMapping(value = "/enlist", method = RequestMethod.POST)
     public View enlistNewTransaction(NewUserTransaction newUserTransaction, RedirectAttributes redirectAttributes) {
         final Transaction transaction = createTransaction(newUserTransaction);
         transactionService.enlistTransaction(transaction);
