@@ -3,6 +3,10 @@ package org.tai.web.servlet.user.transaction;
 import java.util.Collection;
 
 import org.joda.time.DateTime;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -20,10 +24,13 @@ import com.google.common.collect.FluentIterable;
  * @author Przemyslaw Dadel
  * @author Marek Konieczny
  */
+@Controller
+@RequestMapping(value = "/transactions")
 public class TransactionController {
 
     private final TransactionService transactionService;
 
+    @Autowired
     public TransactionController(TransactionService transactionService) {
         this.transactionService = transactionService;
     }
@@ -41,6 +48,7 @@ public class TransactionController {
         return new RedirectView("/user/transactions/list", true);
     }
 
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
     public ModelAndView listTransactions(ModelAndView modelAndView) {
         modelAndView.addObject("transactions", toUglyObjectsWithGetters(transactionService.listTransactions()));
         modelAndView.setViewName("list");
