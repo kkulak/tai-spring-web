@@ -1,5 +1,6 @@
 package wiring.application;
 
+import wiring.domain.model.Account;
 import wiring.domain.model.Transaction;
 import wiring.domain.model.TransactionSummary;
 import wiring.domain.repository.TransactionRepository;
@@ -22,6 +23,11 @@ public class TransactionService {
         return service.summarize(transactions);
     }
 
+    public Collection<TransactionSummary> createTransactionSummary(Account account) {
+        final Collection<Transaction> transactions = repository.transactions(account);
+        return service.summarize(transactions);
+    }
+
     public Collection<Transaction> listTransactions() {
         return repository.transactions();
     }
@@ -29,6 +35,5 @@ public class TransactionService {
     public void enlistTransaction(Transaction transaction) {
         repository.save(transaction);
     }
-
-
+    
 }
