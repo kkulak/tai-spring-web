@@ -4,6 +4,7 @@ import com.google.common.base.Stopwatch;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.filter.GenericFilterBean;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -18,20 +19,14 @@ import java.util.concurrent.TimeUnit;
 /**
  * @author Przemyslaw Dadel
  */
-public class ProfilingFilter implements Filter {
+public class ProfilingFilter extends GenericFilterBean {
     private PerSessionRequestCounter counter;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ProfilingFilter.class);
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
-
-    }
-
-    @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        counter.requestCount();
-        System.err.println("COS LICZE!");
+        counter.newRequest();
         final Stopwatch stopwatch = Stopwatch.createStarted();
         try {
             filterChain.doFilter(servletRequest, servletResponse);

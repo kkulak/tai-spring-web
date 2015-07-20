@@ -7,7 +7,7 @@
 
     <filter>
         <filter-name>profilingFilter</filter-name>
-        <filter-class>org.tai.web.servlet.ProfilingFilter</filter-class>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
         <init-param>
             <param-name>targetBeanName</param-name>
             <param-value>springProfilingFilter</param-value>
