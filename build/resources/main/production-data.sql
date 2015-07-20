@@ -1,2 +1,0 @@
-insert into transactions(accountNumber,date, amount) values ('10234567', '2015-06-10 23:31:14', 115.13);
-insert into transactions(accountNumber,date, amount) values ('12345678', '2015-06-10 23:31:14', 100.13);
